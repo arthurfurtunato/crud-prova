@@ -1,8 +1,8 @@
 import { BadRequestException, Body, ConflictException, Controller, Delete, Get, NotFoundException, Param, Post, Put } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
-import { Exam, Question, Option } from "src/models/prova.model"
-import { ProvaSchema, QuestionSchema, OptionSchema } from "src/schemas/prova.schema"
+import { Exam, Question, Option } from "src/models/exam.model"
+import { ExamSchema, QuestionSchema, OptionSchema } from "src/schemas/exam.schema"
 
 @Controller('/exam')
 export class ExamController {
@@ -10,7 +10,7 @@ export class ExamController {
     constructor(@InjectRepository(Exam) private model: Repository<Exam>) {}
 
     @Post()
-    public async createProva(@Body() body: ProvaSchema): Promise<{ exams: Exam }> {
+    public async createProva(@Body() body: ExamSchema): Promise<{ exams: Exam }> {
         const provaCreated = await this.model.save(body);
         return { exams: provaCreated }
     }
@@ -33,7 +33,7 @@ export class ExamController {
     }
 
     @Put(':id')
-    public async update(@Param('id') id: number, @Body() body: ProvaSchema): Promise<{exams: Exam}> {
+    public async update(@Param('id') id: number, @Body() body: ExamSchema): Promise<{exams: Exam}> {
         const prova = await this.model.findOne({ where: { id }})
 
         if (!prova) {

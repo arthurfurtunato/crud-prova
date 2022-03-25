@@ -15,7 +15,7 @@ export class OptionSchema {
 
 export type ExamType = 'ONLINE' | 'OFFLINE';
 
-export class ProvaSchema {
+export class ExamSchema {
     @IsString()
     @MaxLength(120)
     name: string;
