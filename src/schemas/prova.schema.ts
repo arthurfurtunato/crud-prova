@@ -1,19 +1,18 @@
-import { IsString, MaxLength } from 'class-validator'
-import { Column } from 'typeorm';
+import { IsBoolean, IsString, MaxLength } from 'class-validator'
 
 export class Option {
-    id: string;
+    @IsString()
+    @MaxLength(255)
     key: string;
+
+    @IsString()
+    @MaxLength(255)
     value: string;
+
+    @IsBoolean()
     correct: boolean;
 }
-  
-export class Question {
-    id: string;
-    statement: string;
-    options: Option[];
-}
-  
+
 export type ExamType = 'ONLINE' | 'OFFLINE';
 
 export class ProvaSchema {
@@ -24,7 +23,12 @@ export class ProvaSchema {
     @IsString()
     @MaxLength(120)
     description: string;
-
-    type: ExamType;
-    questions?: Question[];
 }
+
+export class QuestionSchema {
+    @IsString()
+    @MaxLength(255)
+    statement: string;
+    options: Option[];
+}
+  
