@@ -1,6 +1,6 @@
 import { IsBoolean, IsString, MaxLength } from 'class-validator'
 
-export class Option {
+export class OptionSchema {
     @IsString()
     @MaxLength(255)
     key: string;
@@ -29,6 +29,5 @@ export class QuestionSchema {
     @IsString()
     @MaxLength(255)
     statement: string;
-    options: Option[];
 }
   

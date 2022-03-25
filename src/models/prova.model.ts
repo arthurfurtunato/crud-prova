@@ -1,24 +1,5 @@
- import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-//  import { Question } from "./questions.models";
+ import { Column, Entity, JoinColumn, JoinTable, OneToMany, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
-@Entity()
-export class Option {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-
-    @Column()
-    key: string;
-
-    @Column()
-    value: string;
-
-    @Column()
-    correct: boolean;
-
-    // @ManyToOne(() => Question, (question: Question) => question.options)
-    // question: Question;
-}
-  
 export type ExamType = 'ONLINE' | 'OFFLINE';
   
 @Entity()
@@ -35,7 +16,7 @@ export class Prova {
     @Column()
     type: ExamType;
 
-    @OneToMany(type => Question, question => question.id)
+    @OneToMany(type => Question, question => question.prova)
     @JoinColumn()
     questions?: Question[];
 }
@@ -48,10 +29,28 @@ export class Question {
     @Column()
     statement: string;
 
-    @OneToMany(() => Option, (option: Option) => option.id)
+    @OneToMany(type => Option, option => option.question)
     @JoinColumn()
     options: Option[];
 
-    @ManyToOne(type => Prova, prova => prova.id)
+    @ManyToOne(type => Prova, prova => prova.questions)
     prova: Prova;
+}
+
+@Entity()
+export class Option {
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+
+    @Column()
+    key: string;
+
+    @Column()
+    value: string;
+
+    @Column()
+    correct: boolean;
+
+    @ManyToOne(type => Question, question => question.options)
+    question: Question;
 }
