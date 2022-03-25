@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, ValidationPipe } from "@nestjs/common"
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { Prova } from "src/models/prova.model"
@@ -11,7 +11,7 @@ export class ProvaController {
 
     @Post()
     public async create(@Body() body: ProvaSchema): Promise<{ data: Prova }> {
-        const  provaCreated = await this.model.save(body)
+        const provaCreated = await this.model.save(body);
         return { data: provaCreated }
     }
 

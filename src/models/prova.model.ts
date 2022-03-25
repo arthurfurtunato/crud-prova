@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, TableForeignKey } from "typeorm";
+import { ForeignKeyMetadata } from "typeorm/metadata/ForeignKeyMetadata";
 
 export class Option {
     id: string;
@@ -26,6 +27,7 @@ export class Prova {
     @Column({ length: 120})
     description: string;
 
+    @Column()
     type: ExamType;
     questions?: Question[];
 }

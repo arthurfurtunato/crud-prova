@@ -1,4 +1,5 @@
 import { IsString, MaxLength } from 'class-validator'
+import { Column } from 'typeorm';
 
 export class Option {
     id: string;
@@ -23,6 +24,7 @@ export class ProvaSchema {
     @IsString()
     @MaxLength(120)
     description: string;
+
     type: ExamType;
     questions?: Question[];
 }
