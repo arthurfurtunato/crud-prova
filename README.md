@@ -53,6 +53,13 @@ npm run dev:start
 ## Obs.: No meu caso a PORT usada foi a 3000, porém pode ser diferente de acordo com a sua configuração
 ```
 
-## Endpoins
+## Endpoints
 
-- [Prova](./readmes/crud-prova.md) :page_facing_up:
+- [Prova](./readmes/crud-provas.md) :page_facing_up:
+- [Questão](./readmes/crud-questions.md) :question:
+
+## Redes sociais
+
+- [Linkedin](https://www.linkedin.com/in/arthur-furtunato-4994a7208/)
+- [Twitter](https://twitter.com/arthurv05)
+- [Instagram](https://www.instagram.com/arthurv05/)
