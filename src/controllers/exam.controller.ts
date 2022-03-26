@@ -1,4 +1,4 @@
-import { BadRequestException, Body, ConflictException, Controller, Delete, Get, NotFoundException, Param, Post, Put } from "@nestjs/common"
+import { BadRequestException, Body, ConflictException, Controller, Delete, Get, NotAcceptableException, NotFoundException, Param, Post, Put } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { Exam, Question, Option } from "src/models/exam.model"
@@ -59,6 +59,7 @@ export class ExamController {
     }
 }
 
+
 @Controller('/question')
 export class QuestionController {
     
@@ -68,13 +69,13 @@ export class QuestionController {
     public async createQuestion(@Body() body: QuestionSchema): Promise<{ data: Question }> {
         const questionCreated = body;
 
-        if (!body['prova']) {
+        if (!body['exam']) {
             throw new NotFoundException(`A prova precisa existir, para a questão ser cadastrada`)
         }
 
         const questionInExam = await this.model.save({
             ...questionCreated,
-            prova: body['prova'],
+            exam: body['exam'],
         })
 
         return { data: questionInExam }
@@ -84,7 +85,7 @@ export class QuestionController {
     public async getAll(): Promise<{ data: Question[] }> {
         const list = await this.model.find({ relations: ['options']});
 
-        console.log(list[0]['options'][0]['key'])
+        // console.log(list[0]['options'][0]['key'])
 
         return { data: list }
     }
@@ -104,8 +105,6 @@ export class QuestionController {
                 return 0
             }
         })
-
-
 
         return { data: oneQuestion }
     }
@@ -137,24 +136,39 @@ export class QuestionController {
     }
 }
 
+
 @Controller('/option')
 export class OptionController {
     
-    constructor(@InjectRepository(Option) private model: Repository<Option>) {}
+    constructor(@InjectRepository(Option) private model: Repository<Option>, @InjectRepository(Question) private repository: Repository<Question>) {}
 
     @Post()
-    public async createQuestion(@Body() body: OptionSchema): Promise<{ data: Option }> {
+    public async createOption(@Body() body: OptionSchema): Promise<{ data: Option }> {
         const optionCreated = body;
+        const id = body['question']
+        const question = await this.repository.findOne({where: {id}, relations: ['options']})
+
+        for (let i of question.options) {
+            if (i.correct === true && optionCreated['correct'] === true) {
+                throw new ConflictException(`Já existe uma alternativa correta, não podem existir duas.`)
+            }
+
+            if (i.correct === false && question.options.length >= 3 && optionCreated['correct'] === false) {
+                throw new NotAcceptableException(`A questão não pode ficar com todas as questões falsas.`)
+            }
+
+            if (i.key === optionCreated['key']) {
+                throw new NotAcceptableException(`A questão não ter 2 alternativas iguais.`)
+            }
+        }
+
+        if (question.options.length >= 4) {
+            throw new NotAcceptableException(`A questão já possui o máximo de alternativas possível por questão`)
+        }
 
         if (!body['question']) {
             throw new NotFoundException(`A questão precisa existir, para a alternativa ser cadastrada`)
         }
-
-        // if (Question.length >= 4){
-        //     throw new ConflictException(`tal tal`)
-        // }
-
-        console.log(Question)
 
         const optionInQuestion = await this.model.save({
             ...optionCreated,
