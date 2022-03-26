@@ -52,3 +52,7 @@ npm run dev:start
 # Após isso o servidor estará rodando localmente, pronto para ser utilizado na url http://localhost:3000
 ## Obs.: No meu caso a PORT usada foi a 3000, porém pode ser diferente de acordo com a sua configuração
 ```
+
+## Endpoins
+
+- [Prova](./readmes/crud-prova.md) :page_facing_up:
