@@ -1,4 +1,4 @@
-import { BadRequestException, Body, ConflictException, Controller, Delete, Get, NotAcceptableException, NotFoundException, Param, Post, Put } from "@nestjs/common"
+import { Body, ConflictException, Controller, Delete, Get, NotAcceptableException, NotFoundException, Param, Post, Put } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { Exam, Question, Option } from "src/models/exam.model"
@@ -85,18 +85,18 @@ export class QuestionController {
     public async getAll(): Promise<{ data: Question[] }> {
         const list = await this.model.find({ relations: ['options']});
 
-        // console.log(list[0]['options'][0]['key'])
-
         return { data: list }
     }
 
     @Get(':id')
     public async getOne(@Param('id') id: number): Promise<{ data: Question }> {
         const oneQuestion = await this.model.findOne({ where: { id }, relations: ['options']});
+        
+        
 
         // Criado para caso no momento das criações das options, as alternativas fiquem com o id errado,
         // seja mostrado na ordem correta [a, b, c, d]
-        const questionOrdenado = oneQuestion['options'].sort(function(a, b) {
+        oneQuestion['options'].sort(function(a, b) {
             if (a.key > b.key) {
                 return 1
             } else if (a.key < b.key) {
@@ -160,6 +160,10 @@ export class OptionController {
             if (i.key === optionCreated['key']) {
                 throw new NotAcceptableException(`A questão não ter 2 alternativas iguais.`)
             }
+        }
+
+        if (optionCreated['key'] !== 'a' && optionCreated['key'] !== 'b' && optionCreated['key'] !== 'c' && optionCreated['key'] !== 'd') {
+            throw new NotAcceptableException(`A questão só tem alternativas da letra 'a' até a letra'd'`)
         }
 
         if (question.options.length >= 4) {
