@@ -18,6 +18,21 @@ export class ExamController {
     @Get()
     public async getAll(): Promise<{ exams: Exam[] }> {
         const list = await this.model.find({relations: ['questions.options']});
+
+        for (let i of list) {
+            for (let j of i.questions) {
+                j.options.sort(function(a, b) {
+                    if (a.key > b.key) {
+                        return 1
+                    } else if (a.key < b.key) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                })
+            }
+        }
+
         return { exams: list }
     }
 
@@ -27,6 +42,24 @@ export class ExamController {
         
         if (!prova) {
             throw new NotFoundException(`Não Achei uma prova com o id ${id}`);
+        }
+        
+
+        for (let i of prova.questions) {
+            const optionsKeys = ['a', 'b', 'c', 'd']
+            let shuffle = i.options.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+            for (let j of shuffle) {
+                j.key = optionsKeys.shift()
+            }
+            i.options.sort(function(a, b) {
+                if (a.key > b.key) {
+                    return 1
+                } else if (a.key < b.key) {
+                    return -1
+                } else {
+                    return 0
+                }
+            })
         }
         
         return { exams: prova }
@@ -84,17 +117,26 @@ export class QuestionController {
     @Get()
     public async getAll(): Promise<{ data: Question[] }> {
         const list = await this.model.find({ relations: ['options']});
-        const optionsKeys = ['a', 'b', 'c', 'd']
+        
 
         // Dentro dos loops acontece o shuffle, para aleatorizar o array, e logo depois as options recebem suas novas options
         // na ordem correta -> 'a', 'b', 'c', e 'd' e após isso é dado o update para o banco de dados.
         for (let i of list) {
             let shuffle = i.options.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+            const optionsKeys = ['a', 'b', 'c', 'd']
             for (let j of shuffle) {
                 const ordenado = optionsKeys.shift()
                 j.key = ordenado
-                await this.modelOption.update(j.id, j)
-            }            
+            }
+            i.options.sort(function(a, b) {
+                if (a.key > b.key) {
+                    return 1
+                } else if (a.key < b.key) {
+                    return -1
+                } else {
+                    return 0
+                }
+            })            
         }
 
         return { data: list }
@@ -102,10 +144,10 @@ export class QuestionController {
 
     @Get(':id')
     public async getOne(@Param('id') id: number): Promise<{ data: Question }> {
-        const oneQuestion = await this.model.findOne({ where: { id }, relations: ['options']});
+        const oneQuestion = await this.model.findOne({ where: { id }, relations: ['options']})
 
         if (!oneQuestion) {
-            throw new NotFoundException(`Você não pode receber essa questão, pois não existe questão com o id: ${id}`);
+            throw new NotFoundException(`Você não pode receber essa questão, pois não existe questão com o id: ${id}`)
         }
 
         const shuffle = oneQuestion.options.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
@@ -116,10 +158,9 @@ export class QuestionController {
         for (let j of shuffle) {
             const ordenado = optionsKeys.shift()
             j.key = ordenado
-            await this.modelOption.update(j.id, j)
         }   
 
-        // Criado para caso no momento das criações das options, as alternativas fiquem com o id errado,
+        // Criado para caso no momento das criações das options, as alternativas fiquem desordenadas,
         // seja mostrado na ordem correta [a, b, c, d]
         oneQuestion['options'].sort(function(a, b) {
             if (a.key > b.key) {
