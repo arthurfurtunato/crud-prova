@@ -91,8 +91,6 @@ export class QuestionController {
     @Get(':id')
     public async getOne(@Param('id') id: number): Promise<{ data: Question }> {
         const oneQuestion = await this.model.findOne({ where: { id }, relations: ['options']});
-        
-        
 
         // Criado para caso no momento das criações das options, as alternativas fiquem com o id errado,
         // seja mostrado na ordem correta [a, b, c, d]
@@ -147,13 +145,18 @@ export class OptionController {
         const optionCreated = body;
         const id = body['question']
         const question = await this.repository.findOne({where: {id}, relations: ['options']})
+        let count = 0;
 
         for (let i of question.options) {
+            if (i.correct === false) {
+                count++
+            }
+
             if (i.correct === true && optionCreated['correct'] === true) {
                 throw new ConflictException(`Já existe uma alternativa correta, não podem existir duas.`)
             }
 
-            if (i.correct === false && question.options.length >= 3 && optionCreated['correct'] === false) {
+            if (count >= 3 && optionCreated['correct'] === false) {
                 throw new NotAcceptableException(`A questão não pode ficar com todas as questões falsas.`)
             }
 
