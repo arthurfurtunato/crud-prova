@@ -63,7 +63,7 @@ export class ExamController {
 @Controller('/question')
 export class QuestionController {
     
-    constructor(@InjectRepository(Question) private model: Repository<Question>) {}
+    constructor(@InjectRepository(Question) private model: Repository<Question>, @InjectRepository(Option) private modelOption: Repository<Option>) {}
 
     @Post()
     public async createQuestion(@Body() body: QuestionSchema): Promise<{ data: Question }> {
@@ -84,6 +84,18 @@ export class QuestionController {
     @Get()
     public async getAll(): Promise<{ data: Question[] }> {
         const list = await this.model.find({ relations: ['options']});
+        const optionsKeys = ['a', 'b', 'c', 'd']
+
+        // Dentro dos loops acontece o shuffle, para aleatorizar o array, e logo depois as options recebem suas novas options
+        // na ordem correta -> 'a', 'b', 'c', e 'd' e após isso é dado o update para o banco de dados.
+        for (let i of list) {
+            let shuffle = i.options.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+            for (let j of shuffle) {
+                const ordenado = optionsKeys.shift()
+                j.key = ordenado
+                await this.modelOption.update(j.id, j)
+            }            
+        }
 
         return { data: list }
     }
@@ -91,6 +103,21 @@ export class QuestionController {
     @Get(':id')
     public async getOne(@Param('id') id: number): Promise<{ data: Question }> {
         const oneQuestion = await this.model.findOne({ where: { id }, relations: ['options']});
+
+        if (!oneQuestion) {
+            throw new NotFoundException(`Você não pode receber essa questão, pois não existe questão com o id: ${id}`);
+        }
+
+        const shuffle = oneQuestion.options.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+        const optionsKeys = ['a', 'b', 'c', 'd']
+
+        // Dentro do loops acontece o shuffle, para aleatorizar o array, e logo depois as options recebem suas novas options
+        // na ordem correta -> 'a', 'b', 'c', e 'd' e após isso é dado o update para o banco de dados.
+        for (let j of shuffle) {
+            const ordenado = optionsKeys.shift()
+            j.key = ordenado
+            await this.modelOption.update(j.id, j)
+        }   
 
         // Criado para caso no momento das criações das options, as alternativas fiquem com o id errado,
         // seja mostrado na ordem correta [a, b, c, d]
@@ -152,6 +179,10 @@ export class OptionController {
                 count++
             }
 
+            if (question.options.length >= 4) {
+                throw new NotAcceptableException(`A questão já possui o máximo de alternativas possível por questão`)
+            }
+
             if (i.correct === true && optionCreated['correct'] === true) {
                 throw new ConflictException(`Já existe uma alternativa correta, não podem existir duas.`)
             }
@@ -167,10 +198,6 @@ export class OptionController {
 
         if (optionCreated['key'] !== 'a' && optionCreated['key'] !== 'b' && optionCreated['key'] !== 'c' && optionCreated['key'] !== 'd') {
             throw new NotAcceptableException(`A questão só tem alternativas da letra 'a' até a letra'd'`)
-        }
-
-        if (question.options.length >= 4) {
-            throw new NotAcceptableException(`A questão já possui o máximo de alternativas possível por questão`)
         }
 
         if (!body['question']) {
