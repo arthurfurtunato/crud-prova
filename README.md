@@ -41,6 +41,7 @@ Projeto que consiste em uma API REST que serve para um sistema de provas, podend
 - [PostgreSQL](https://www.postgresql.org/)
 - [Docker](https://www.docker.com/)
 - [WSL2](https://docs.microsoft.com/pt-br/windows/wsl/install)
+- [Postman](https://www.postman.com/)
 
 ## Novos conhecimentos do projeto?
 Como foi um projeto realmente novo, onde eu precisei ir aprendendo durante o desenvolvimento do projeto, os principais conhecimento adquiridos foi do próprio Typescript e do NestJS.
