@@ -34,7 +34,7 @@ Projeto que consiste em uma API REST que serve para um sistema de provas, podend
 
 :white_check_mark: `Funcionalidade 3` Algumas operações também nas alternativas das questões;
 
-:white_check_mark: `Funcionalidade 4` Para garantir melhor segurança na aplicação da prova, foi implementado no código um formato para embaralhar as alternativas de cada questão;
+:white_check_mark: `Funcionalidade 4` Para garantir melhor segurança na aplicação da prova, foi implementado a funcionalidade que embaralha as alternativas de cada questão;
 
 ## Quais foram as tecnologias utilizadas no projeto?
 - [Typescript](https://www.typescriptlang.org/)
