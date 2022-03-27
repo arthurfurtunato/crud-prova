@@ -64,9 +64,9 @@ npm run dev:start
 
 ## Endpoints
 
-- [Prova](./readmes/crud-provas.md) :page_facing_up:
-- [Questão](./readmes/crud-questions.md) :question:
-- [Options](./readmes/options.md) :negative_squared_cross_mark:
+- [Prova](./readme/crud-provas.md) :page_facing_up:
+- [Questão](./readme/crud-questions.md) :question:
+- [Options](./readme/options.md) :negative_squared_cross_mark:
 
 ## Redes sociais
 
