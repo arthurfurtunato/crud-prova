@@ -63,7 +63,7 @@ $ cd crud-prova
 ## Foi utilizado por mim o npm
 $ npm install
 
-## No meu caso para utilizar do banco de dados do PostgreSQL utilizei o docker através do seguinte comando
+## No meu caso para utilizar o banco de dados do PostgreSQL utilizei o docker através do seguinte comando
 ## criando um container com imagem do postgres -> 'senha-de-exemplo' não é realmente a senha utilizada no comando
 $ docker run -d -e POSTGRES_PASSWORD='senha-de-exemplo' -p 5432:5432 postgres:latest
 
