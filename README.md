@@ -64,8 +64,13 @@ $ cd crud-prova
 $ npm install
 
 ## No meu caso para utilizar do banco de dados do PostgreSQL utilizei o docker através do seguinte comando
-## criando um container com imagem do postgres -> 'password' não é realmente a senha utilizada no comando
-$ docker run -d -e POSTGRES_PASSWORD='password' -p 5432:5432 postgres:latest
+## criando um container com imagem do postgres -> 'senha-de-exemplo' não é realmente a senha utilizada no comando
+$ docker run -d -e POSTGRES_PASSWORD='senha-de-exemplo' -p 5432:5432 postgres:latest
+
+# Configurar .env
+## Para tomar como base, no projeto vem um .env.example
+## No arquivo possui todas as variáveis de ambiente necessárias que terá no seu .env
+## Será também necessário que seu banco esteja de pé antes de rodar a aplicação
 
 # Execute a aplicação no modo de desenvolvimento
 npm run dev:start
