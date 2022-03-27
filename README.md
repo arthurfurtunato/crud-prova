@@ -1,6 +1,10 @@
 
 <h1 align="center"> Projeto CRUD-PROVA - Back-end </h1>
 
+<p align="center">
+  <img src="https://uab.ufsc.br/administracao/files/2020/06/provas.jpg" />
+</p>
+
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=FINALIZADO&color=GREEN&style=for-the-badge)
 
 ## Sumário
