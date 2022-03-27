@@ -65,8 +65,8 @@ $ cd crud-prova
 
 # Configure as suas variáveis de ambiente criando um arquivo .env!
 ## No projeto possui um arquivo .env.example com todas as variáveis necessárias.
-## Como se trata apenas um desafio irei passar com as informações do meu arquivo .env mesmo pra ficar fácil de subir o banco.
-## Mas se preferir pode mudar os valores, entretanto o container postgres teria que ser customizado
+## Como se trata apenas um desafio irei passar com as informações do meu arquivo .env mesmo pra ficar fácil de subir o banco, logo apenas é necessário copiar as informações do .env.example para um arquivo .env!
+## Mas se preferir pode mudar os valores, entretanto o container postgres teria que ser customizado.
 
 # Rode os containers
 $ docker-compose up --build
