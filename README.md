@@ -44,6 +44,7 @@ Projeto que consiste em uma API REST que serve para um sistema de provas, podend
 - [PostgreSQL](https://www.postgresql.org/)
 - [Docker](https://www.docker.com/)
 - [WSL2](https://docs.microsoft.com/pt-br/windows/wsl/install)
+- [Postman](https://www.postman.com/)
 
 ## Novos conhecimentos do projeto?
 Como foi um projeto em que eu tive o primeiro contato com algumas tecnologias que eu não conhecia como, por exemplo, Typescript e do NestJS, precisei estudá-las durante o desenvolvimento do projeto.
@@ -80,7 +81,7 @@ $ docker-compose up --build
   <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFepBOXaqPO_Q/profile-displayphoto-shrink_800_800/0/1642861778954?e=1654128000&v=beta&t=KXO8g1AngeiB0VrDz-RiCynb6oN6Ee8aeP3k5YsIMR0" />
 </p>
 
-<h3 align="center">Arthur Furtunato - Desenvolvedor Back-end júnior</h3>
+<h3 align="center">Arthur Furtunato - Desenvolvedor Back-End júnior</h3>
 <h6 align="center">Entre em contato pelas redes sociais abaixo. :grin:</h3>
 
 ## Redes sociais
