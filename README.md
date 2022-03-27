@@ -7,6 +7,7 @@
 
 ![npm version](https://img.shields.io/badge/npm-6.14.16-blue)
 ![node version](https://img.shields.io/badge/node-v12.22.10-green)
+![nest version](https://img.shields.io/badge/nest-8.2.4-red)
 
 ## Sumário
 
@@ -61,6 +62,10 @@ $ cd crud-prova
 # Instale as dependências necessárias
 ## Foi utilizado por mim o npm
 $ npm install
+
+## No meu caso para utilizar do banco de dados do PostgreSQL utilizei o docker através do seguinte comando
+## criando um container com imagem do postgres -> 'password' não é realmente a senha utilizada no comando
+$ docker run -d -e POSTGRES_PASSWORD='password' -p 5432:5432 postgres:latest
 
 # Execute a aplicação no modo de desenvolvimento
 npm run dev:start
