@@ -90,7 +90,7 @@ npm run dev:start
   <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFepBOXaqPO_Q/profile-displayphoto-shrink_800_800/0/1642861778954?e=1654128000&v=beta&t=KXO8g1AngeiB0VrDz-RiCynb6oN6Ee8aeP3k5YsIMR0" />
 </p>
 
-<h3 align="center">Arthur Furtunato - Desenvolvedor Back-end júnior</h3>
+<h3 align="center">Arthur Furtunato - Desenvolvedor Back-End júnior</h3>
 <h6 align="center">Entre em contato pelas redes sociais abaixo. :grin:</h3>
 
 ## Redes sociais
