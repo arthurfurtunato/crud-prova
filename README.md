@@ -11,14 +11,17 @@
 
 ## Sumário
 
-* [O que é?](#o-que-é)
-* [Como funciona?](#como-funciona)
-* [Tecnologias](#quais-foram-as-tecnologias-utilizadas-no-projeto)
-* [Conhecimentos absorvidos](#novos-conhecimentos-do-projeto)
-* [Rodando o server](#como-executar-o-projeto)
-* [Endpoints](#endpoints)
-* [Feito por](#feito-por)
-* [Redes Sociais](#redes-sociais)
+- [Sumário](#sumário)
+- [O que é?](#o-que-é)
+- [Como funciona?](#como-funciona)
+  - [O projeto apresenta principalmente 4 funcionalidades:](#o-projeto-apresenta-principalmente-4-funcionalidades)
+- [Quais foram as tecnologias utilizadas no projeto?](#quais-foram-as-tecnologias-utilizadas-no-projeto)
+- [Novos conhecimentos do projeto?](#novos-conhecimentos-do-projeto)
+- [Como executar o projeto?](#como-executar-o-projeto)
+  - [Colocando o server para rodar:](#colocando-o-server-para-rodar)
+- [Endpoints](#endpoints)
+- [Feito por](#feito-por)
+- [Redes sociais](#redes-sociais)
 
 ## O que é?
 Projeto que consiste em uma API REST que serve para um sistema de provas, podendo ser provas ONLINES :computer: ou OFFLINE :book:
@@ -31,7 +34,7 @@ Projeto que consiste em uma API REST que serve para um sistema de provas, podend
 
 :white_check_mark: `Funcionalidade 3` Algumas operações também nas alternativas das questões;
 
-:white_check_mark: `Funcionalidade 4` Para dificultar as possíveis colas dos alunos, também foi implementado no código um formato para embaralhar as alternativas de cada questão;
+:white_check_mark: `Funcionalidade 4` Para garantir melhor segurança na aplicação da prova, foi implementado no código um formato para embaralhar as alternativas de cada questão;
 
 ## Quais foram as tecnologias utilizadas no projeto?
 - [Typescript](https://www.typescriptlang.org/)
@@ -43,11 +46,11 @@ Projeto que consiste em uma API REST que serve para um sistema de provas, podend
 - [WSL2](https://docs.microsoft.com/pt-br/windows/wsl/install)
 
 ## Novos conhecimentos do projeto?
-Como foi um projeto realmente novo, onde eu precisei ir aprendendo durante o desenvolvimento do projeto, os principais conhecimento adquiridos foi do próprio Typescript e do NestJS.
+Como foi um projeto em que eu tive o primeiro contato com algumas tecnologias que eu não conhecia como, por exemplo, Typescript e do NestJS, precisei estudá-las durante o desenvolvimento do projeto.
 
 ## Como executar o projeto?
 De início será necessário que já tenha no seu computador as seguintes ferramentas:
-- Node.js
+- Docker e docker-compose
 - Git
 - Algum editor da sua preferência (No meu caso foi utilizado o [VSCode](https://code.visualstudio.com/))
 
@@ -59,19 +62,11 @@ $ git clone https://github.com/arthurfurtunato/crud-prova.git
 # Acesse a pasta do projeto no terminal/cmd
 $ cd crud-prova
 
-# Instale as dependências necessárias
-## Foi utilizado por mim o npm
-$ npm install
+# Rode os containers
+$ docker-compose up --build
 
-## No meu caso para utilizar do banco de dados do PostgreSQL utilizei o docker através do seguinte comando
-## criando um container com imagem do postgres -> 'password' não é realmente a senha utilizada no comando
-$ docker run -d -e POSTGRES_PASSWORD='password' -p 5432:5432 postgres:latest
-
-# Execute a aplicação no modo de desenvolvimento
-npm run dev:start
-
-## Obs.: O servidor iniciará na porta de número 3000
-## Após isso o servidor estará rodando localmente, pronto para ser utilizado na url http://localhost:3000
+## Obs.: Os containers iniciarão com o app escutando a porta de número 3000
+## Após isso o serviço está pronto para ser utilizado na url http://localhost:3000
 ```
 
 ## Endpoints
