@@ -18,13 +18,13 @@ Projeto que consiste em uma API REST que serve para um sistema de provas, podend
 
 ## Como funciona?
 ### O projeto apresenta principalmente 4 funcionalidades:
-:white_check_mark: - Um CRUD para as provas (CREATE, READ, UPDATE, DELETE), aonde é possível fazer as operações nas provas;
+:white_check_mark: `Funcionalidade 1` Um CRUD para as provas (CREATE, READ, UPDATE, DELETE), aonde é possível fazer as operações nas provas;
 
-:white_check_mark: - Um CRUD para as questões (CREATE, READ, UPDATE, DELETE), aonde é possível fazer as operações nas questões das provas;
+:white_check_mark: `Funcionalidade 2` Um CRUD para as questões (CREATE, READ, UPDATE, DELETE), aonde é possível fazer as operações nas questões das provas;
 
-:white_check_mark: - Algumas operações também nas alternativas das questões;
+:white_check_mark: `Funcionalidade 3` Algumas operações também nas alternativas das questões;
 
-:white_check_mark: - Para dificultar as possíveis colas dos alunos, também foi implementado no código um formato para embaralhar as alternativas de cada questão;
+:white_check_mark: `Funcionalidade 4` Para dificultar as possíveis colas dos alunos, também foi implementado no código um formato para embaralhar as alternativas de cada questão;
 
 ## Quais foram as tecnologias utilizadas no projeto?
 - [Typescript](https://www.typescriptlang.org/)
@@ -72,3 +72,5 @@ npm run dev:start
 - [Linkedin](https://www.linkedin.com/in/arthur-furtunato-4994a7208/)
 - [Twitter](https://twitter.com/arthurv05)
 - [Instagram](https://www.instagram.com/arthurv05/)
+
+![Badge feito por](https://img.shields.io/badge/Feito%20por-Arthur%20Furtunato-red)
