@@ -1,4 +1,4 @@
-<h1 align="center"> Endpoint (/exam) </h1>
+<h1 align="center"> Endpoint (/exam/) :page_facing_up:</h1>
 
 # POST (/exam/)
 Nesse caso é possível cadastrar uma nova prova passando as seguintes chaves: "name", "description", "type".<br>
