@@ -1,6 +1,9 @@
 <h1 align="center"> Endpoint (/exam) </h1>
 
 # POST (/exam/)
+Nesse caso é possível cadastrar uma nova prova passando as seguintes chaves: "name", "description", "type".<br>
+onde o type só pode ser "ONLINE" ou "OFFLINE"
+
 ## Body
 ```json
 {
